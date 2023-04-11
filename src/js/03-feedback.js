@@ -29,12 +29,17 @@ updateFormState()
 formRef.addEventListener('input', throttle(saveFormState, 500));
 // Викликаємо слухача подій на формі з подією submit
 formRef.addEventListener('submit', (evt) =>{
-    evt.preventDefault();
-    
+  evt.preventDefault();
+  
   const formData = {
     email: inputRef.value,
     message: textareaRef.value
   };
+
+   if (formData.email.trim() === '' || formData.message.trim() === '') {
+    return alert('Заповніть всі поля!')
+   }
+
     console.log('Form Data:', formData);
     
   localStorage.removeItem(STORAGE_FORM); //Видаляємо дані з локального сховища
